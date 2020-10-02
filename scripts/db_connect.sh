@@ -1,0 +1,1 @@
+psql "postgres://${DATABASE_USER}:${DATABASE_PASSWORD}@${DATABASE_HOST}:${DATABASE_PORT}/taskleaf_development?sslmode=disable"

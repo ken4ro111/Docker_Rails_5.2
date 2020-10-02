@@ -1,0 +1,21 @@
+{
+    "recommendations": [
+        "bungcip.better-toml",
+        "EditorConfig.EditorConfig",
+        "mattn.openvim",
+        "ms-azuretools.vscode-docker",
+        "ms-vscode-remote.remote-containers",
+        "VisualStudioExptTeam.vscodeintellicode",
+        "vscode-icons-team.vscode-icons",
+        "arjun.swagger-viewer",
+        "rebornix.ruby",
+        "wingrunr21.vscode-ruby",
+        "bung87.rails",
+        "castwide.solargraph",
+        "hridoy.rails-snippets",
+        "aki77.rails-db-schema",
+        "kaiwood.endwise",
+        "misogi.ruby-rubocop"
+    ],
+    "unwantedRecommendations": []
+}
