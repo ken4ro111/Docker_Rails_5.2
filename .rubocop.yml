@@ -1,150 +1,271 @@
 require:
     - rubocop-rails
     - rubocop-rspec
+    - rubocop-performance
+    - rubocop-packaging
 
 Rails:
     Enables: true
 AllCops:
     TargetRubyVersion: 2.5.1
     Exclude:
-        - "vendor/**/*"
-        - "bin/**"
-        - "db/schema.rb"
-        - "node_modules/**/*"
-        - "tmp/**/*"
-        - "lib/**/*"
+        - "**/tmp/**/*"
+        - "**/templates/**/*"
+        - "**/vendor/**/*"
+        - "actionpack/lib/action_dispatch/journey/parser.rb"
+        - "actionmailbox/test/dummy/**/*"
+        - "actiontext/test/dummy/**/*"
+        - "**/node_modules/**/*"
 
-    DisplayCopNames: true
+Performance:
+    Exclude:
+        - "**/test/**/*"
 
-# trueかfalseを設定しないと警告が出る
-Lint/DeprecatedOpenSSLConstant:
+# Prefer assert_not over assert !
+Rails/AssertNot:
+    Include:
+        - "**/test/**/*"
+
+# Prefer assert_not_x over refute_x
+Rails/RefuteMethods:
+    Include:
+        - "**/test/**/*"
+
+Rails/IndexBy:
     Enabled: true
-Lint/MixedRegexCaptureTypes:
+
+Rails/IndexWith:
     Enabled: true
 
+# Prefer &&/|| over and/or.
 Style/AndOr:
-    Enabled: false
-## 日本語コメントを許可します。
-Style/AsciiComments:
-    Enabled: false
+    Enabled: true
 
+# Align `when` with `case`.
+Layout/CaseIndentation:
+    Enabled: true
+
+Layout/ClosingHeredocIndentation:
+    Enabled: true
+
+# Align comments with method definitions.
+Layout/CommentIndentation:
+    Enabled: true
+
+Layout/ElseAlignment:
+    Enabled: true
+
+# Align `end` with the matching keyword or starting expression except for
+# assignments, where it should be aligned with the LHS.
+Layout/EndAlignment:
+    Enabled: true
+    EnforcedStyleAlignWith: variable
+    AutoCorrect: true
+
+Layout/EmptyLineAfterMagicComment:
+    Enabled: true
+
+Layout/EmptyLinesAroundAccessModifier:
+    Enabled: true
+    EnforcedStyle: only_before
+
+Layout/EmptyLinesAroundBlockBody:
+    Enabled: true
+
+# In a regular class definition, no empty lines around the body.
+Layout/EmptyLinesAroundClassBody:
+    Enabled: true
+
+# In a regular method definition, no empty lines around the body.
+Layout/EmptyLinesAroundMethodBody:
+    Enabled: true
+
+# In a regular module definition, no empty lines around the body.
+Layout/EmptyLinesAroundModuleBody:
+    Enabled: true
+
+# Use Ruby >= 1.9 syntax for hashes. Prefer { a: :b } over { :a => :b }.
+Style/HashSyntax:
+    Enabled: true
+
+Layout/FirstArgumentIndentation:
+    Enabled: true
+
+# Method definitions after `private` or `protected` isolated calls need one
+# extra level of indentation.
 Layout/IndentationConsistency:
+    Enabled: true
     EnforcedStyle: indented_internal_methods
 
-Layout/CommentIndentation:
-    Enabled: false
-    # https://rubocop.readthedocs.io/en/stable/cops_layout/#layoutemptylinesaroundattributeaccessor
-Layout/EmptyLinesAroundAttributeAccessor:
-    Enabled: true
-    # https://rubocop.readthedocs.io/en/stable/cops_layout/#layoutspacearoundmethodcalloperator
-Layout/SpaceAroundMethodCallOperator:
-    Enabled: true
-    # https://rubocop.readthedocs.io/en/stable/cops_lint/#lintraiseexception
-Lint/RaiseException:
-    Enabled: true
-    # https://rubocop.readthedocs.io/en/stable/cops_lint/#lintstructnewoverride
-Lint/StructNewOverride:
-    Enabled: tru
-
-Layout/LineLength:
-    Max: 150
-
-Metrics/AbcSize:
-    Exclude:
-        - "lib/tasks/dev.rake"
-
-Metrics/BlockLength:
-    CountComments: false
-    Exclude:
-        - "Guardfile"
-        - "config/routes.rb"
-        - "spec/**/*"
-        - "app/views/**/*.jbuilder"
-        - "lib/tasks/dev.rake"
-
-Metrics/ClassLength:
-    CountComments: false
-
-Metrics/MethodLength:
-    CountComments: false
-    Max: 15
-    Exclude:
-        - "lib/tasks/dev.rake"
-
-Metrics/ModuleLength:
-    CountComments: false
-
-Naming/FileName:
-    Exclude:
-        - "Gemfile"
-        - "Guardfile"
-
-Naming/MethodParameterName:
-    AllowedNames: [e]
-
-RSpec/ContextWording:
-    Enabled: false
-
-RSpec/DescribedClass:
-    Enabled: false
-
-RSpec/ExampleLength:
-    Enabled: false
-
-RSpec/ExpectInHook:
-    Enabled: false
-
-# An instance variable can be used when needed, but use let when possible.
-RSpec/InstanceVariable:
-    Enabled: false
-
-RSpec/MessageSpies:
-    Enabled: false
-
-RSpec/MultipleExpectations:
-    Enabled: false
-
-RSpec/NestedGroups:
-    Max: 5
-
-Style/BlockComments:
-    Exclude:
-        - "spec/spec_helper.rb"
-
-# https://rubocop.readthedocs.io/en/stable/cops_style/#styleblockdelimiters
-Style/BlockDelimiters:
-    EnforcedStyle: braces_for_chaining
-    Exclude:
-        - "spec/**/*"
-
-Style/ClassAndModuleChildren:
-    Enabled: false
-
-Style/Documentation:
-    Enabled: false
-
-# https://rubocop.readthedocs.io/en/stable/cops_style/#styleexponentialnotation
-Style/ExponentialNotation:
+# Two spaces, no tabs (for indentation).
+Layout/IndentationWidth:
     Enabled: true
 
-# https://rubocop.readthedocs.io/en/stable/cops_style/#stylehasheachmethods
-Style/HashEachMethods:
+Layout/LeadingCommentSpace:
     Enabled: true
-    # https://rubocop.readthedocs.io/en/stable/cops_style/#stylehashtransformkeys
+
+Layout/SpaceAfterColon:
+    Enabled: true
+
+Layout/SpaceAfterComma:
+    Enabled: true
+
+Layout/SpaceAfterSemicolon:
+    Enabled: true
+
+Layout/SpaceAroundEqualsInParameterDefault:
+    Enabled: true
+
+Layout/SpaceAroundKeyword:
+    Enabled: true
+
+Layout/SpaceBeforeComma:
+    Enabled: true
+
+Layout/SpaceBeforeComment:
+    Enabled: true
+
+Layout/SpaceBeforeFirstArg:
+    Enabled: true
+
+Style/DefWithParentheses:
+    Enabled: true
+
+# Defining a method with parameters needs parentheses.
+Style/MethodDefParentheses:
+    Enabled: true
+
+Style/FrozenStringLiteralComment:
+    Enabled: true
+    EnforcedStyle: always
+    Exclude:
+        - "actionview/test/**/*.builder"
+        - "actionview/test/**/*.ruby"
+        - "actionpack/test/**/*.builder"
+        - "actionpack/test/**/*.ruby"
+        - "activestorage/db/migrate/**/*.rb"
+        - "activestorage/db/update_migrate/**/*.rb"
+        - "actionmailbox/db/migrate/**/*.rb"
+        - "actiontext/db/migrate/**/*.rb"
+
+Style/RedundantFreeze:
+    Enabled: true
+
+# Use `foo {}` not `foo{}`.
+Layout/SpaceBeforeBlockBraces:
+    Enabled: true
+
+# Use `foo { bar }` not `foo {bar}`.
+Layout/SpaceInsideBlockBraces:
+    Enabled: true
+    EnforcedStyleForEmptyBraces: space
+
+# Use `{ a: 1 }` not `{a:1}`.
+Layout/SpaceInsideHashLiteralBraces:
+    Enabled: true
+
+Layout/SpaceInsideParens:
+    Enabled: true
+
+# Check quotes usage according to lint rule below.
+Style/StringLiterals:
+    Enabled: true
+    EnforcedStyle: double_quotes
+
+# Detect hard tabs, no hard tabs.
+Layout/IndentationStyle:
+    Enabled: true
+
+# Empty lines should not have any spaces.
+Layout/TrailingEmptyLines:
+    Enabled: true
+
+# No trailing whitespace.
+Layout/TrailingWhitespace:
+    Enabled: true
+
+# Use quotes for string literals when they are enough.
+Style/RedundantPercentQ:
+    Enabled: true
+
+Lint/AmbiguousOperator:
+    Enabled: true
+
+Lint/AmbiguousRegexpLiteral:
+    Enabled: true
+
+Lint/ErbNewArguments:
+    Enabled: true
+
+# Use my_method(my_arg) not my_method( my_arg ) or my_method my_arg.
+Lint/RequireParentheses:
+    Enabled: true
+
+Lint/ShadowingOuterLocalVariable:
+    Enabled: true
+
+Lint/RedundantStringCoercion:
+    Enabled: true
+
+Lint/UriEscapeUnescape:
+    Enabled: true
+
+Lint/UselessAssignment:
+    Enabled: true
+
+Lint/DeprecatedClassMethods:
+    Enabled: true
+
+Style/ParenthesesAroundCondition:
+    Enabled: true
+
 Style/HashTransformKeys:
     Enabled: true
-    # https://rubocop.readthedocs.io/en/stable/cops_style/#stylehashtransformvalues
-style/HashTransformValues:
+
+Style/HashTransformValues:
     Enabled: true
 
-style/IfUnlessModifier:
-    Enabled: false
+Style/RedundantBegin:
+    Enabled: true
 
-style/Lambda:
-    EnforcedStyle: literal
+Style/RedundantReturn:
+    Enabled: true
+    AllowMultipleReturnValues: true
 
-style/RegexpLiteral:
-    Enabled: false
-    # https://rubocop.readthedocs.io/en/stable/cops_style/#styleslicingwithrange
-style/SlicingWithRange:
+Style/Semicolon:
+    Enabled: true
+    AllowAsExpressionSeparator: true
+
+# Prefer Foo.method over Foo::method
+Style/ColonMethodCall:
+    Enabled: true
+
+Style/TrivialAccessors:
+    Enabled: true
+
+Performance/FlatMap:
+    Enabled: true
+
+Performance/RedundantMerge:
+    Enabled: true
+
+Performance/StartWith:
+    Enabled: true
+
+Performance/EndWith:
+    Enabled: true
+
+Performance/RegexpMatch:
+    Enabled: true
+
+Performance/ReverseEach:
+    Enabled: true
+
+Performance/UnfreezeString:
+    Enabled: true
+
+Performance/DeletePrefix:
+    Enabled: true
+
+Performance/DeleteSuffix:
     Enabled: true
