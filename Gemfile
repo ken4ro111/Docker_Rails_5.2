@@ -55,6 +55,8 @@ group :development do
   gem 'rubocop-rails'
   gem 'rubocop-rspec'
   gem 'rubocop-packaging'
+  gem 'ransack'
+  # gem 'mailcatcher'
 end
 
 group :development do
