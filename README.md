@@ -2,6 +2,6 @@
 
 * 実装
 ```
-./db_connect.sh # DB接続
+./script/db_connect.sh # DB接続
 ./setup.sh      # サーバー立ち上げ
 ```
