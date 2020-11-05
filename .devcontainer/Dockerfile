@@ -82,6 +82,23 @@ ENV LC_ALL ja_JP.UTF-8
 #     LANGUAGE="ja_JP:ja" \
 #     LC_ALL="ja_JP.UTF-8"
 
+ENV YARN_VERSION 1.13.0
+
+# install yarn
+RUN curl -L --compressed "https://yarnpkg.com/downloads/$YARN_VERSION/yarn-v$YARN_VERSION.tar.gz" > /tmp/yarn.tar.gz && \
+  tar -xzf /tmp/yarn.tar.gz -C /opt && \
+  ln -s /opt/yarn-v$YARN_VERSION/bin/yarn /usr/local/bin/yarn && \
+  ln -s /opt/yarn-v$YARN_VERSION/bin/yarnpkg /usr/local/bin/yarnpkg && \
+  rm /tmp/yarn.tar.gz
+
+ENV NODE_VERSION 10.15.1
+
+# install nodejs
+RUN curl --compressed "https://nodejs.org/dist/v$NODE_VERSION/node-v$NODE_VERSION-linux-x64.tar.xz" > /tmp/node.tar.xz && \
+  tar -xJf /tmp/node.tar.xz -C /usr/local --strip-components=1 && \
+  ln -s /usr/local/bin/node /usr/local/bin/nodejs && \
+  rm /tmp/node.tar.xz
+
 
 # Switch back to dialog for any ad-hoc use of apt-get
 ENV DEBIAN_FRONTEND=dialog
